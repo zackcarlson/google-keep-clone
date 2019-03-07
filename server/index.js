@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var notes = require('../database-mongo');
-var path = require('path');
 var app = express();
 
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -38,10 +37,6 @@ app.put('/modal-notes', function(req, res) {
     .catch(error => console.error(error));
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/../react-client/dist/index.html'));
-});
-
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+app.listen(process.env.PORT || 3000, function() {
+  console.log('listening on port!');
 });
